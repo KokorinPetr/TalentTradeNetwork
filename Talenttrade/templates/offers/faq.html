@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FAQ - Talent Trade Network</title>
+    <style>
+        /* Общие стили для страницы */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+            color: #333;
+        }
+        .faq-item {
+            background-color: #fff;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .question {
+            font-weight: bold;
+            color: #007bff;
+        }
+        .answer {
+            margin-top: 10px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Frequently Asked Questions</h1>
+        <!-- Здесь будет список вопросов и ответов -->
+        {% for faq in faqs %}
+        <div class="faq-item">
+            <p class="question">{{ faq.question }}</p>
+            <p class="answer">{{ faq.answer }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+<footer>
+    <a href="{% url 'offers:index' %}">Go to main page</a>
+</footer>
+</html>

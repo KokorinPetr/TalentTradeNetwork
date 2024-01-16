@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Offer Details</title>
+    <style>
+        /* Стили для шапки */
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        /* Стили для основного контента */
+        main {
+            padding: 20px;
+        }
+
+        .offer-details {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .offer-details h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .offer-details p {
+            margin-bottom: 15px;
+        }
+
+        /* Стили для списка категорий */
+        .offer-details ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .offer-details ul li {
+            margin-bottom: 5px;
+        }
+
+        /* Стили для подвала */
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .normal-text {
+            text-decoration: none; /* Убрать подчеркивание ссылок */
+            color: #15e0f6; /* Цвет текста */
+            /* Дополнительные стили по вашему выбору */
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Offer Details</h1>
+    </header>
+
+    <main>
+        <div class="offer-details">
+            <h2>{{ offer.title }}</h2>
+            <p>{{ offer.description }}</p>
+            <p>Categories:
+                {% for category in offer.categories.all %}
+                    {{ category.name }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </p>
+            <p>Publication date: {{ offer.created_at|date:"M. d, Y" }}</p>
+            <p>Contact information: {{ offer.user.email }}</p>
+        </div>
+    </main>
+
+    <footer>
+        <a href="{% url 'offers:index' %}" class="normal-text">Go to main page</a>
+        <p>© 2023 Talent Trade Network. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

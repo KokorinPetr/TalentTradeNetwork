@@ -1,0 +1,18 @@
+<header>
+    <h1>Talent Trade Network (TTN)</h1>
+    {% if request.user.is_authenticated %}
+        <li>
+          Пользователь: {{ user.username }}
+        </li>
+        <li class="nav-item"> 
+            <a class="normal-text nav-link link-light {% if view_name  == 'users.logout' %}active{% endif %}"  href="{% url 'users:logout' %}">Выйти</a>
+        </li>
+        <li>
+            <a class="normal-text" href="{% url 'offers:profile' user.username %}">Your profile</a>
+        </li>
+        {% else %}
+        <li class="nav-item"> 
+          <a class="normal-text nav-link link-light {% if view_name  == 'users:login' %}active{% endif %}" href="{% url 'users:login' %}">Войти</a>
+        </li>
+        {% endif %}
+</header>

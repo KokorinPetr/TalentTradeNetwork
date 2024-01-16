@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .search-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        form input[type="text"] {
+            width: 70%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            margin-right: 10px;
+        }
+
+        form button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .search-results ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .search-results ul li {
+            margin-bottom: 5px;
+        }
+
+        .search-results p {
+            font-style: italic;
+            color: #888;
+        }
+
+        /* Общий стиль для обычного текста */
+        .normal-text {
+            text-decoration: none; /* Убрать подчеркивание ссылок */
+            color: #333; /* Цвет текста */
+            /* Дополнительные стили по вашему выбору */
+        }
+
+        .normal-text:hover {
+            color: #007bff; /* Изменить цвет при наведении на синий */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="search-container">
+        <form method="GET" action="{% url 'offers:search' %}">
+            <input type="text" name="q" value="{{ query }}" placeholder="Search...">
+            <button type="submit">Search</button>
+        </form>
+
+        <div class="search-results">
+            {% if results %}
+                <ul>
+                    {% for item in results %}
+                        <li>
+                            <a href="{% url 'offers:offer_detail' item.id %}" class="normal-text">{{ item.title }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No results found.</p>
+            {% endif %}
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+{% extends 'base.html' %} 
+{% block main %}
+
+    <div class="categories-header" onclick="toggleCategories()">Select category</div>
+
+    <div class="categories-container" id="categories-container">
+        <form method="GET" action="{% url 'offers:index' %}">
+            <select name="category_filter">
+                <option value="">All Categories</option>
+                {% for category in categories %}
+                    <option value="{{ category.name }}" {% if category.name == selected_category %} selected {% endif %}>
+                        {{ category.name }}
+                    </option>
+                {% endfor %}
+            </select>
+            <button type="submit">Filter</button>
+        </form>
+        <button onclick="toggleCategories()">Close</button>
+    </div>
+
+
+    <div class="offers-container">
+        {% if offers %}
+            {% for offer in offers %}
+                <div class="offer">
+                    <h2>{{ offer.title }}</h2>
+                    <p>{{ offer.description }}</p>
+                    <p>User: {{ offer.user.get_full_name }}</p>
+                    <p>Categories:
+                        {% for category in offer.categories.all %}
+                            {{ category.name }}{% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    </p>
+                    <p>Publication date: {{ offer.created_at|date:"M. d, Y" }}</p>
+                    <a href="{% url 'offers:offer_detail' offer.id %}">Details</a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Нет доступных предложений</p>
+        {% endif %}
+    </div>
+    <!-- Below is Js for filter button -->
+    <script>
+        function toggleCategories() {
+            const container = document.getElementById('categories-container');
+            container.style.display = (container.style.display === 'block') ? 'none' : 'block';
+        }
+    </script>
+{% endblock %}

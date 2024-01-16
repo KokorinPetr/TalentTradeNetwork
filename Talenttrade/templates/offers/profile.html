@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+<header>
+    <h1>User Profile</h1>
+    <!-- Здесь можно добавить информацию о пользователе, например, его имя или никнейм -->
+    <p>Welcome, {{ user.get_full_name }}!</p>
+</header>
+{% block main %}
+    <div class="profile-info">
+        <!-- Здесь можете добавить различную информацию о пользователе -->
+        <p>{{ user.get_full_name}}'s profile</p>
+        <p>Email: {{ user.email }}</p>
+        <p>Location: City, Country</p>
+        <!-- Дополнительная информация о пользователе -->
+    </div>
+
+    <div class="offers-container">
+        {% if offers %}
+            {% for offer in offers %}
+                <div class="offer">
+                    <h2>{{ offer.title }}</h2>
+                    <p>{{ offer.description }}</p>
+                    <p>Categories:
+                        {% for category in offer.categories.all %}
+                            {{ category.name }}{% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    </p>
+                    <p>Publication date: {{ offer.created_at|date:"M. d, Y" }}</p>
+                    <a href="{% url 'offers:offer_detail' offer.id %}">Details</a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p> Haven't available offres from this user.</p>
+        {% endif %}
+    </div>
+{% endblock %}
