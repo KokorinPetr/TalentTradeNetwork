@@ -4,6 +4,8 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 User = get_user_model()
 
+TEXT_LIMIT = 15
+
 
 class Offer(models.Model):
     user = models.ForeignKey(
@@ -45,6 +47,9 @@ class Review(models.Model):
     )
     created_at = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return self.text[:TEXT_LIMIT]
+
 
 class Category(models.Model):
     name = models.CharField(max_length=50)
@@ -62,4 +67,4 @@ class FAQ(models.Model):
         ordering = ['-id']
 
     def __str__(self):
-        return self.question
+        return self.question[:TEXT_LIMIT]

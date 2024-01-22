@@ -1,94 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Offer Details</title>
-    <style>
-        /* Стили для шапки */
-        header {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 20px;
-        }
-
-        h1 {
-            margin: 0;
-        }
-
-        /* Стили для основного контента */
-        main {
-            padding: 20px;
-        }
-
-        .offer-details {
-            border: 1px solid #ccc;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
-        .offer-details h2 {
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
-
-        .offer-details p {
-            margin-bottom: 15px;
-        }
-
-        /* Стили для списка категорий */
-        .offer-details ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .offer-details ul li {
-            margin-bottom: 5px;
-        }
-
-        /* Стили для подвала */
-        footer {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 10px;
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-        }
-
-        .normal-text {
-            text-decoration: none; /* Убрать подчеркивание ссылок */
-            color: #15e0f6; /* Цвет текста */
-            /* Дополнительные стили по вашему выбору */
-        }
-    </style>
-</head>
-<body>
-
-    <header>
-        <h1>Offer Details</h1>
-    </header>
-
-    <main>
-        <div class="offer-details">
-            <h2>{{ offer.title }}</h2>
-            <p>{{ offer.description }}</p>
-            <p>Categories:
-                {% for category in offer.categories.all %}
-                    {{ category.name }}{% if not forloop.last %}, {% endif %}
-                {% endfor %}
-            </p>
-            <p>Publication date: {{ offer.created_at|date:"M. d, Y" }}</p>
-            <p>Contact information: {{ offer.user.email }}</p>
+{% extends 'base.html' %}
+<header>
+    <h1>Offer Details</h1>
+</header>
+{% block main %}
+    <h2>Offer</h2>
+    <div class="offer-container">
+        <aside class="col-12 col-md-3">
+            <ul class="list-group list-group-flush">
+                <h2>{{ offer.title }}</h2>
+                <p>{{ offer.description }}</p>
+                <p>Categories:
+                    {% for category in offer.categories.all %}
+                        {{ category.name }}{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                </p>
+                <p>Publication date: {{ offer.created_at|date:"M. d, Y" }}</p>
+                <p>Contact information: {{ offer.user.email }}</p>
+                {% if mean_rating is not None %}
+                    <p>Mean rating: {{ mean_rating }}</p>
+                {% else %}
+                    <p>No reviews available</p>
+                {% endif %}
+            </ul>
+        </aside>
+    </div>
+    {% if mean_rating is not None%}
+        <h2>Reviews</h2>
+        <div class="reviews-container">
+            {% for review in reviews %}
+                {% include 'includes/review_output.html' %}
+                <hr>
+            {% endfor %}
         </div>
-    </main>
+    {% else %}
 
-    <footer>
-        <a href="{% url 'offers:index' %}" class="normal-text">Go to main page</a>
-        <p>© 2023 Talent Trade Network. All rights reserved.</p>
-    </footer>
-
-</body>
-</html>
+    {% endif %}
+{% endblock %}

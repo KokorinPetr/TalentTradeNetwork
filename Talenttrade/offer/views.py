@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
+from django.db.models import Avg
 
-from .models import Offer, FAQ, Category, User
+from .models import Offer, FAQ, Category, User, Review
 
 def index(request):
     categories = Category.objects.all()
@@ -20,8 +21,12 @@ def index(request):
 
 def offer_detail(request, offer_id):
     offer = get_object_or_404(Offer, id=offer_id)
+    reviews = Review.objects.filter(offer=offer)
+    mean_rating = reviews.aggregate(Avg('rating'))['rating__avg']
     context = {
-        'offer': offer
+        'offer': offer,
+        'reviews': reviews,
+        'mean_rating': mean_rating
     }
     return render(request, 'offers/offer_detail.html', context)
 

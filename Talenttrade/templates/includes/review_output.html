@@ -1,0 +1,13 @@
+<div class="media mb-4">
+    <div class="media-body">
+    <h5 class="mt-0">
+        <a href="{% url 'offers:profile' review.user.username %}">
+            {{ review.user.username }}
+        </a>
+    </h5>
+    <p>
+        Text: {{ review.text }}
+    </p>
+        Rating: {{ review.rating}}
+    </div>
+</div>

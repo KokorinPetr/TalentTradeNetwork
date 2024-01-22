@@ -1,102 +1,10 @@
-<head>
+{% load static %}
     <meta charset="UTF-8">
-    <title>Talent Trade Network - Главная страница</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
-        }
+    <title>Talent Trade Network - main page</title>
 
-        header {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 20px 0;
-        }
+    <link rel="icon" href="{% static 'img/ttn-logo-F77AAF6ECE-seeklogo.com.png' %}" type="image/png">
+    <link rel="shortcut icon" href="{% static 'img/ttn-logo-F77AAF6ECE-seeklogo.com.png' %}" type="image/png">
 
-        h1 {
-            margin: 0;
-        }
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 
-        .offers-container {
-            width: 80%;
-            margin: 20px auto;
-        }
-
-        .offer {
-            background-color: #fff;
-            border-radius: 5px;
-            padding: 15px;
-            margin-bottom: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .offer h2 {
-            margin-top: 0;
-            font-size: 24px;
-            color: #333;
-        }
-
-        .offer p {
-            margin-bottom: 10px;
-        }
-
-        .offer p:last-child {
-            margin-bottom: 0;
-        }
-
-
-        /* Стили для кнопки-плашки */
-        .categories-header {
-            padding: 10px;
-            background-color: #007bff;
-            color: #fff;
-            cursor: pointer;
-            border-radius: 5px;
-            margin-bottom: 10px;
-        }
-
-        /* Стили для контейнера выбора категорий (по умолчанию скрыт) */
-        .categories-container {
-            display: none;
-            max-width: 400px;
-            margin: 20px auto;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .categories-container select {
-            width: 100%;
-            padding: 8px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-            box-sizing: border-box;
-        }
-
-        .categories-container button {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
-        }
-
-        .normal-text {
-            text-decoration: none; /* Убрать подчеркивание ссылок */
-            color: #faf8f8; /* Цвет текста */
-            /* Дополнительные стили по вашему выбору */
-        }
-
-        .normal-text:hover {
-            color: #007bff; /* Изменить цвет при наведении на синий */
-        }
-    </style>
-</head>
