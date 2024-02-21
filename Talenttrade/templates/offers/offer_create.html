@@ -1,0 +1,22 @@
+{% extends 'base.html' %} 
+{% block main %}
+<h2>
+  {% if is_edit %}
+    Edit offer
+  {% else %}
+    Create offer
+  {% endif %}
+</h2>
+
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ form.as_p }}
+    <button type="submit">
+      {% if is_edit %}
+        Save
+      {% else %}
+        Create offer
+      {% endif %}
+    </button>
+</form>
+{% endblock %}

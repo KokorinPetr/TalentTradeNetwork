@@ -2,9 +2,11 @@ from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.permissions import SAFE_METHODS
 
-from .serializers import (OfferReadSerializer, OfferEditSerializer,
-                          UserListSerializer, CategoriesSerializer,
-                          ReviewSerializer)
+from .serializers import (
+    OfferReadSerializer, OfferEditSerializer,
+    UserListSerializer, CategoriesSerializer,
+    ReviewSerializer
+)
 from offer.models import Offer, User, Category, Review
 
 

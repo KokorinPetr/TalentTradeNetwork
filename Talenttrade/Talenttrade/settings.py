@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'offer.apps.OfferConfig',
     'users.apps.UsersConfig',
     'api.apps.ApiConfig',
+    'chat.apps.ChatConfig',
 
     'rest_framework',
     'djoser',
@@ -108,15 +109,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
 
-
-
-'''
-STATIC_URL = 'static/'
-STATICFILES_DIRS = ((BASE_DIR / 'static/'),)
-#STATIC_ROOT = BASE_DIR / "staticfiles"
-'''
-
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = 'offers:index'
@@ -136,4 +128,6 @@ REST_FRAMEWORK = {
 SIMPLE_JWT = {
    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
    'AUTH_HEADER_TYPES': ('Bearer',),
-} 
+}
+
+LOGIN_URL = '/users/login/'

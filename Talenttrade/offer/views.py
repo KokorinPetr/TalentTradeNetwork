@@ -1,12 +1,15 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import Avg
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 
 from .models import Offer, FAQ, Category, User, Review
+from .forms import OfferForm
+
 
 def index(request):
     categories = Category.objects.all()
     selected_category = request.GET.get('category_filter')
-
     offers = Offer.objects.all()
 
     if selected_category:
@@ -26,7 +29,7 @@ def offer_detail(request, offer_id):
     context = {
         'offer': offer,
         'reviews': reviews,
-        'mean_rating': mean_rating
+        'mean_rating': mean_rating,
     }
     return render(request, 'offers/offer_detail.html', context)
 
@@ -59,3 +62,43 @@ def profile(request, username):
         'offers': offers
     }
     return render(request, 'offers/profile.html', context)
+
+
+
+@login_required
+@csrf_exempt
+def offer_create(request):
+    form = OfferForm(
+        request.POST or None
+    )
+    if not form.is_valid():
+        return render(request, 'offers/offer_create.html', {'form': form})
+    offer = form.save(commit=False)
+    offer.user = request.user
+    offer.save()
+    offer.categories.clear()
+    offer.categories.add(*form.cleaned_data['categories'])
+    return redirect('offers:profile', request.user)
+
+
+@login_required
+@csrf_exempt
+def offer_edit(request, offer_id):
+    offer = get_object_or_404(Offer, id=offer_id)
+    form = OfferForm(
+        request.POST or None,
+        files=request.FILES or None,
+        instance=offer
+    )
+    user = request.user
+    context = {
+        'offer': offer,
+        'form': form,
+        'is_edit': True
+    }
+    if user != offer.user:
+        return redirect('offers:offer_detail', offer_id)
+    if form.is_valid():
+        form.save()
+        return redirect('offers:offer_detail', offer_id)
+    return render(request, 'offers/offer_create.html', context)

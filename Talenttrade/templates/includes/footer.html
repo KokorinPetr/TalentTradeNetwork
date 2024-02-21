@@ -10,5 +10,10 @@
         <li>
             <a href="{% url 'offers:index' %}">Main page</a>
         </li>
+        {% if request.user.is_authenticated %}
+            <li>
+                <a href="{% url 'offers:offer_create' %}">Create offer</a>
+            </li>
+        {% endif %}
     </ul>
 </footer>

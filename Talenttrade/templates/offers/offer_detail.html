@@ -9,6 +9,7 @@
             <ul class="list-group list-group-flush">
                 <h2>{{ offer.title }}</h2>
                 <p>{{ offer.description }}</p>
+                <a href="{% url 'offers:profile' offer.user %}" class="link-text">User: {{ offer.user }}</a>
                 <p>Categories:
                     {% for category in offer.categories.all %}
                         {{ category.name }}{% if not forloop.last %}, {% endif %}
@@ -24,6 +25,11 @@
             </ul>
         </aside>
     </div>
+    {% if request.user == offer.user %}
+        <a class="btn btn-primary" href="{% url 'offers:offer_edit' offer.id%}">
+            Edit
+        </a>
+    {% endif %}
     {% if mean_rating is not None%}
         <h2>Reviews</h2>
         <div class="reviews-container">
