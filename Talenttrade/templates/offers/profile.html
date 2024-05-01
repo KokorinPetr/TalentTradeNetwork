@@ -14,12 +14,29 @@
         <!-- Дополнительная информация о пользователе -->
     </div>
 
+    <div>
+        {% if user.userprofile.facebook %}
+            <a href="{{ user.userprofile.facebook }}">Facebook</a>
+        {% endif %}
+        {% if user.userprofile.twitter %}
+            <a href="{{ user.userprofile.twitter }}">Twitter</a>
+        {% endif %}
+        {% if user.userprofile.linkedin %}
+            <a href="{{ user.userprofile.linkedin }}">LinkedIn</a>
+        {% endif %}
+    </div>
+
     <div class="offers-container">
         {% if offers %}
             {% for offer in offers %}
                 <div class="offer">
                     <h2>{{ offer.title }}</h2>
                     <p>{{ offer.description }}</p>
+                    {% if offer.price.amount == 0 %}
+                        <p>Price: free</p>
+                    {% else %}
+                        <p>Price: {{ offer.price }}</p>
+                    {% endif %}
                     <p>Categories:
                         {% for category in offer.categories.all %}
                             {{ category.name }}{% if not forloop.last %}, {% endif %}

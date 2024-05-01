@@ -3,8 +3,8 @@ from django.db.models import Avg
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 
-from .models import Offer, FAQ, Category, User, Review
-from .forms import OfferForm
+from .models import Offer, FAQ, Category, User, Review, UserProfile
+from .forms import OfferForm, UserProfileForm
 
 
 def index(request):
@@ -102,3 +102,23 @@ def offer_edit(request, offer_id):
         form.save()
         return redirect('offers:offer_detail', offer_id)
     return render(request, 'offers/offer_create.html', context)
+
+
+@login_required
+def edit_profile(request):
+    user = request.user
+    try:
+        profile = user.userprofile
+    except UserProfile.DoesNotExist:
+        profile = UserProfile(user=user)
+        profile.save()
+
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('offers:profile', request.user)
+    else:
+        form = UserProfileForm(instance=profile)
+
+    return render(request, 'offers/edit_profile.html', {'form': form})

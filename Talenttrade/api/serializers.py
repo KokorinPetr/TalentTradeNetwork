@@ -20,7 +20,7 @@ class CategoriesSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Category
-        fields = ('name', 'description',)
+        fields = ('id', 'name', 'description',)
 
 
 class ReviewSerializer(serializers.ModelSerializer):
@@ -56,7 +56,7 @@ class OfferReadSerializer(serializers.ModelSerializer):
         fields = (
            "id", "categories", "created_at",
            "user", "title", "description",
-           "mean_rating", 'sw_planet', "reviews"
+           "mean_rating", "reviews"
         )
 
     def get_mean_rating(self, obj):

@@ -10,6 +10,9 @@
         <li>
             <a href="{% url 'offers:index' %}">Main page</a>
         </li>
+        <li>
+            <a href="{% url 'chat:index' %}">Chat rooms</a>
+        </li>
         {% if request.user.is_authenticated %}
             <li>
                 <a href="{% url 'offers:offer_create' %}">Create offer</a>

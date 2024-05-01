@@ -10,6 +10,7 @@
                 <h2>{{ offer.title }}</h2>
                 <p>{{ offer.description }}</p>
                 <a href="{% url 'offers:profile' offer.user %}" class="link-text">User: {{ offer.user }}</a>
+                <p>Price: {{ offer.price }}</p>
                 <p>Categories:
                     {% for category in offer.categories.all %}
                         {{ category.name }}{% if not forloop.last %}, {% endif %}

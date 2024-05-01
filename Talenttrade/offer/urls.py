@@ -11,6 +11,7 @@ urlpatterns = [
     path('faq/', views.faq_view, name='FAQ' ),
     path('search/', views.search_view, name='search'),
     path('profile/<str:username>/', views.profile, name='profile'),
+    path('edit-profile/', views.edit_profile, name='edit_profile'),
     path('', views.index, name='index'),
     
 ]

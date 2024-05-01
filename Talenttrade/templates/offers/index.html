@@ -27,6 +27,11 @@
                     <h2>{{ offer.title }}</h2>
                     <p>{{ offer.description }}</p>
                     <p>User: {{ offer.user.get_full_name }}</p>
+                    {% if offer.price.amount == 0 %}
+                        <p>Price: free</p>
+                    {% else %}
+                        <p>Price: {{ offer.price }}</p>
+                    {% endif %}
                     <p>Categories:
                         {% for category in offer.categories.all %}
                             {{ category.name }}{% if not forloop.last %}, {% endif %}

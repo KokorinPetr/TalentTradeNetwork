@@ -10,6 +10,9 @@
         <li>
             <a class="normal-text" href="{% url 'offers:profile' user.username %}">Your profile</a>
         </li>
+        <li>
+          <a class="normal-text" href="{% url 'offers:edit_profile' %}">Edit profile links</a>
+        </li>
         {% else %}
         <li class="nav-item"> 
           <a class="normal-text nav-link link-light {% if view_name  == 'users:login' %}active{% endif %}" href="{% url 'users:login' %}">Войти</a>
