@@ -160,3 +160,5 @@ cython_debug/
 #.idea/
 
 how_to_start.txt
+.idea
+.DS_Store
