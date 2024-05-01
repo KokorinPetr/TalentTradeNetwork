@@ -18,13 +18,6 @@ Talent Trade Network aims to provide a platform for users to exchange skills and
 
 ## Technical Specifications
 
-### Data Models
-
-1. **User:** Represents registered users.
-2. **Offer:** Represents service offers.
-3. **Review:** Allows users to leave reviews for services.
-4. **Category:** Classifies services into categories.
-5. **FAQ:** Contains frequently asked questions.
 
 ## Stages
 
